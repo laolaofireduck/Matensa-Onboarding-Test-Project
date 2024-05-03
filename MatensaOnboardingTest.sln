@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E1E378AA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{150F5741-3B26-46E1-B05A-23C2FBF461E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ewallet.Api", "src\Ewallet.Api\Ewallet.Api.csproj", "{351CFE18-E261-4A9E-931B-59A06DC022EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ewallet.Web", "src\Ewallet.Web\Ewallet.Web.csproj", "{351CFE18-E261-4A9E-931B-59A06DC022EC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ewallet.Core", "src\Ewallet.Core\Ewallet.Core.csproj", "{A160AF5D-2153-4B3B-820B-488F7F8DFB1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ewallet.Endpoints", "src\Ewallet.Endpoints\Ewallet.Endpoints.csproj", "{5FD35604-9B96-4995-B168-BA102D728D14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{A160AF5D-2153-4B3B-820B-488F7F8DFB1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A160AF5D-2153-4B3B-820B-488F7F8DFB1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A160AF5D-2153-4B3B-820B-488F7F8DFB1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FD35604-9B96-4995-B168-BA102D728D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FD35604-9B96-4995-B168-BA102D728D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FD35604-9B96-4995-B168-BA102D728D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FD35604-9B96-4995-B168-BA102D728D14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,5 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{351CFE18-E261-4A9E-931B-59A06DC022EC} = {150F5741-3B26-46E1-B05A-23C2FBF461E4}
 		{A160AF5D-2153-4B3B-820B-488F7F8DFB1E} = {150F5741-3B26-46E1-B05A-23C2FBF461E4}
+		{5FD35604-9B96-4995-B168-BA102D728D14} = {150F5741-3B26-46E1-B05A-23C2FBF461E4}
 	EndGlobalSection
 EndGlobal
