@@ -1,8 +1,10 @@
 ﻿using Ewallet.Core.Application.Users;
+using Ewallet.Core.Domain.Users;
 using Ewallet.Core.Infrastructure;
 using Ewallet.Core.Infrastructure.Interceptors;
 using Ewallet.Core.Infrastructure.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -21,8 +23,16 @@ public static class DependencyInjectionRegister
 
         //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
+        //Application
+        services.AddApplication();
         //Infrastructure 
         services.AddPersistance();
+
+        return services;
+    }
+    private static IServiceCollection AddApplication(this IServiceCollection services)
+    {
+        services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>();
 
         return services;
     }
@@ -40,4 +50,5 @@ public static class DependencyInjectionRegister
 
         return services;
     }
+
 }

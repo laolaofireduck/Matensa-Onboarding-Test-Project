@@ -16,29 +16,25 @@ public class User : AggregateRoot<UserId, Guid>
         string firstName,
         string lastName,
         DateOnly dob,
-        string email,
-        string password) : base(id)
+        string email) : base(id)
     {
         FirstName = firstName;
         LastName = lastName;
         DOB = dob;
         Email = email;
-        Password = password;
     }
     public static User Create(
     string firstName,
     string lastName,
     DateOnly dob,
-    string email,
-    string password)
+    string email)
     {
         User user = new(
                     UserId.CreateUnique(),
                     firstName,
                     lastName,
                     dob,
-                    email,
-                    password);
+                    email);
 
         user.AddDomainEvent(new UserCreated(user));
 
@@ -47,4 +43,8 @@ public class User : AggregateRoot<UserId, Guid>
 #pragma warning disable CS8618
     private User() { }
 #pragma warning restore CS8618
+    public void SetPassword(string password)
+    {
+        Password = password;
+    }
 }
