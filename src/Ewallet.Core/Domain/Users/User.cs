@@ -1,4 +1,5 @@
-﻿using Ewallet.SharedKernel;
+﻿using Ewallet.Core.Domain.Users.Events;
+using Ewallet.SharedKernel;
 
 namespace Ewallet.Core.Domain.Users;
 
@@ -31,12 +32,19 @@ public class User : AggregateRoot<UserId, Guid>
     string email,
     string password)
     {
-        return new(
-            UserId.CreateUnique(),
-            firstName,
-            lastName,
-            dob,
-            email,
-            password);
+        User user = new(
+                    UserId.CreateUnique(),
+                    firstName,
+                    lastName,
+                    dob,
+                    email,
+                    password);
+
+        user.AddDomainEvent(new UserCreated(user));
+
+        return user;
     }
+#pragma warning disable CS8618
+    private User() { }
+#pragma warning restore CS8618
 }
