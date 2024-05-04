@@ -1,7 +1,6 @@
 using Ewallet.Core;
 using Ewallet.Endpoints;
 
-
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
@@ -10,8 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 }
 
 var app = builder.Build();
-
-app.UseHttpsRedirection();
+{
+    app.UseEndpoints();
+    app.UseHttpsRedirection();
+}
 
 app.Run();
 
