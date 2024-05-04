@@ -8,4 +8,9 @@
     <Folder Include="Infrastructure\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ewallet.SharedKernel\Ewallet.SharedKernel.csproj" />
+  </ItemGroup>
+
 </Project>
