@@ -1,14 +1,14 @@
-﻿using System.Net.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using ErrorOr;
+using Microsoft.AspNetCore.Http;
 
 namespace Ewallet.Endpoints.Controllers;
 
 [Authorize]
 [ApiController]
-public class ApiController : ControllerBase
+public class ApiControllerBase : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)
     {
