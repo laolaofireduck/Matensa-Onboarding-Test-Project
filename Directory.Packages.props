@@ -1,7 +1,9 @@
 <Project>
-    <ItemGroup>
+  <ItemGroup>
     <PackageVersion Include="MediatR" Version="12.2.0" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-    </ItemGroup>
+  </ItemGroup>
 </Project>
