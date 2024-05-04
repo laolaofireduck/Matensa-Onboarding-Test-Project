@@ -1,6 +1,6 @@
 using Ewallet.Core;
 using Ewallet.Endpoints;
-using Ewallet.Web.Mappings;
+using Ewallet.Endpoints.Mappings;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);

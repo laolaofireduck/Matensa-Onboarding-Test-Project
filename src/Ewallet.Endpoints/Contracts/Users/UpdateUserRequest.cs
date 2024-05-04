@@ -2,11 +2,11 @@
 
 namespace Ewallet.Endpoints.Contracts.Users;
 
-public record CreateUserRequest(
+public record UpdateUserRequest(
     [Required] string FirstName,
     [Required] string LastName,
-    [Required] DateOnly DOB,
     [Required] string PhoneNumber,
+    [Required] DateOnly DOB,
     [Required] string Email,
-    [Required] string Password);
-
+    [Required] string Password
+    );

@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
 using Mapster;
 using MapsterMapper;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Ewallet.Web.Mappings;
+namespace Ewallet.Endpoints.Mappings;
 
 public static class DependencyInjection
 {
