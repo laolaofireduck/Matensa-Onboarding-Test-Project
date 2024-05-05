@@ -35,7 +35,6 @@ public class User : AggregateRoot<UserId, Guid>, ISoftDeletable
         PhoneNumber = phoneNumber;
         Email = email;
     }
-    public Account Account { get; private set; }
     public static User Create(
     string firstName,
     string lastName,

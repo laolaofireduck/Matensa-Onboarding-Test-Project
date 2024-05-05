@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ewallet.Core.Infrastructure.Migrations
 {
     [DbContext(typeof(EwalletDbContext))]
-    [Migration("20240505172230_Accounts")]
+    [Migration("20240505174901_Accounts")]
     partial class Accounts
     {
         /// <inheritdoc />
@@ -39,9 +39,6 @@ namespace Ewallet.Core.Infrastructure.Migrations
             modelBuilder.Entity("Ewallet.Core.Domain.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("AccountId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateOnly>("DOB")
@@ -74,8 +71,6 @@ namespace Ewallet.Core.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -140,17 +135,6 @@ namespace Ewallet.Core.Infrastructure.Migrations
                     b.Navigation("Statements");
 
                     b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("Ewallet.Core.Domain.Users.User", b =>
-                {
-                    b.HasOne("Ewallet.Core.Domain.Accounts.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
                 });
 #pragma warning restore 612, 618
         }

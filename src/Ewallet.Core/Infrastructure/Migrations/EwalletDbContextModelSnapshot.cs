@@ -38,9 +38,6 @@ namespace Ewallet.Core.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("AccountId")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateOnly>("DOB")
                         .HasColumnType("TEXT");
 
@@ -71,8 +68,6 @@ namespace Ewallet.Core.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -137,17 +132,6 @@ namespace Ewallet.Core.Infrastructure.Migrations
                     b.Navigation("Statements");
 
                     b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("Ewallet.Core.Domain.Users.User", b =>
-                {
-                    b.HasOne("Ewallet.Core.Domain.Accounts.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
                 });
 #pragma warning restore 612, 618
         }
