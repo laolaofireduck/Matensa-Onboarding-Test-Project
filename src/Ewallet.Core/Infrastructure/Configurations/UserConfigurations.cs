@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using Ewallet.Core.Domain.Users;
+using Ewallet.Core.Domain.Accounts;
 
 namespace Ewallet.Core.Infrastructure.Configurations;
 
@@ -40,5 +41,7 @@ public sealed class UserConfigurations : IEntityTypeConfiguration<User>
 
         builder
             .Property(u => u.Password);
+
+        
     }
 }

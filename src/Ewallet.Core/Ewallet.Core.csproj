@@ -5,6 +5,8 @@
 
   <ItemGroup>
     <PackageReference Include="ErrorOr" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
    
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
@@ -15,6 +17,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ewallet.SharedKernel\Ewallet.SharedKernel.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Application\Account\Events\" />
   </ItemGroup>
 
 </Project>

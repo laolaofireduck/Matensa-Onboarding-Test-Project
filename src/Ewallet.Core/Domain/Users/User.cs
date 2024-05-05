@@ -1,10 +1,11 @@
-﻿using Ewallet.Core.Domain.Users.Events;
+﻿using Ewallet.Core.Domain.Accounts;
+using Ewallet.Core.Domain.Users.Events;
 using Ewallet.SharedKernel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ewallet.Core.Domain.Users;
 
-public class User : AggregateRoot<UserId, Guid>
+public class User : AggregateRoot<UserId, Guid>, ISoftDeletable
 {
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
@@ -12,12 +13,12 @@ public class User : AggregateRoot<UserId, Guid>
     public string PhoneNumber { get; private set; }
     public string Email { get; private set; }
     public string Password { get; private set; }
+    public bool IsDeleted { get; private set; }
 
     #region Calculated props
     [NotMapped]
     public string FullName
         => $"{FirstName} {LastName}";
-
     #endregion
 
     private User(
@@ -34,6 +35,7 @@ public class User : AggregateRoot<UserId, Guid>
         PhoneNumber = phoneNumber;
         Email = email;
     }
+    public Account Account { get; private set; }
     public static User Create(
     string firstName,
     string lastName,
@@ -87,4 +89,11 @@ public class User : AggregateRoot<UserId, Guid>
         Email = email;
     }
     #endregion
+
+    public void Delete()
+    {
+        IsDeleted = true;
+
+        // we can publish a domain event on delete
+    }
 }

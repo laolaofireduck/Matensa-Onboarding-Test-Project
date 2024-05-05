@@ -1,10 +1,8 @@
 ﻿using Ewallet.SharedKernel;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Ewallet.Core.Infrastructure.Interceptors;
 using Ewallet.Core.Domain.Users;
+using Ewallet.Core.Domain.Accounts;
 
 namespace Ewallet.Core.Infrastructure;
 
@@ -21,6 +19,9 @@ public sealed class EwalletDbContext : DbContext
     }
 
     public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Account> Accounts { get; set; } = null!;
+    public DbSet<AccountStatement> AccountStatements { get; set; } = null!;
+    public DbSet<AccountTransaction> AccountTransactions { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,6 +30,8 @@ public sealed class EwalletDbContext : DbContext
             .ApplyConfigurationsFromAssembly(typeof(EwalletDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);
+
+        Entity.UseSoftDelete(modelBuilder);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
