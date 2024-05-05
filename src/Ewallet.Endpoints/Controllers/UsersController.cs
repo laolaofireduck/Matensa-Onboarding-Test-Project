@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using MapsterMapper;
 using Ewallet.Endpoints.Contracts.Users;
 using Ewallet.Core.Application.Users.Update;
+using Ewallet.Core.Application.Users.List;
+using Ewallet.Core.Application.Users.Delete;
 
 
 namespace Ewallet.Endpoints.Controllers;
@@ -21,15 +23,25 @@ public class UsersController : ApiControllerBase
         _mapper = mapper;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> List([FromQuery] ListUserRequest request)
+    {
+        var command = _mapper.Map<ListUserQuery>(request);
+        var listUserResult = await _mediator.Send(command);
+
+        return listUserResult.Match(
+            listResult => Ok(_mapper.Map<List<UserResponse>>(listResult)),
+            errors => Problem(errors));
+    }
 
     [HttpPost]
     public async Task<IActionResult> Create(CreateUserRequest request)
     {
         var command = _mapper.Map<CreateUserCommand>(request);
-        var authenticationResult = await _mediator.Send(command);
+        var createResult = await _mediator.Send(command);
 
-        return authenticationResult.Match(
-            authenticationResult => Created($"api/users/{authenticationResult.Id.Value}",_mapper.Map<UserResponse>(authenticationResult)),
+        return createResult.Match(
+            createResult => Created($"api/users/{createResult.Id.Value}", _mapper.Map<UserResponse>(createResult)),
             errors => Problem(errors));
     }
 
@@ -46,11 +58,24 @@ public class UsersController : ApiControllerBase
             Password: request.Password
             );
 
-        var authenticationResult = await _mediator.Send(command);
+        var updateResult = await _mediator.Send(command);
 
-        return authenticationResult.Match(
-            authenticationResult => Ok(_mapper.Map<UserResponse>(authenticationResult)),
+        return updateResult.Match(
+            updateResult => Ok(_mapper.Map<UserResponse>(updateResult)),
             errors => Problem(errors));
     }
 
+    [HttpDelete("{id:Guid}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var command = new DeleteUserCommand(
+           Id: id
+           );
+
+        var DeleteResult = await _mediator.Send(command);
+
+        return DeleteResult.Match(
+            deleteResult => Ok(),
+            errors => Problem(errors));
+    }
 }

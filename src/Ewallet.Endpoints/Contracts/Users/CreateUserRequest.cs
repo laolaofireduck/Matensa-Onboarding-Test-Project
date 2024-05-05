@@ -6,7 +6,7 @@ public record CreateUserRequest(
     [Required] string FirstName,
     [Required] string LastName,
     [Required] DateOnly DOB,
-    [Required] string PhoneNumber,
-    [Required] string Email,
+    [Required][Phone] string PhoneNumber,
+    [Required][EmailAddress] string Email,
     [Required] string Password);
 

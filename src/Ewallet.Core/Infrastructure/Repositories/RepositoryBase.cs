@@ -31,8 +31,11 @@ public abstract class RepositoryBase<T, TId, TIdType> : IRepository<T, TId, TIdT
         {
             return entity;
         }
+        if (entity is ISoftDeletable softDeletableEntity)
+            softDeletableEntity.Delete();
+        else
+            dbSet.Remove(entity);
 
-        dbSet.Remove(entity);
         await context.SaveChangesAsync();
 
         return entity;
@@ -43,9 +46,17 @@ public abstract class RepositoryBase<T, TId, TIdType> : IRepository<T, TId, TIdT
         return await dbSet.FindAsync(id);
     }
 
-    public async Task<List<T>> GetAll()
+    public async Task<IEnumerable<T>> GetAll(int? skip, int? take)
     {
-        return await dbSet.ToListAsync();
+        IQueryable<T> usersQuery = dbSet;
+
+        if (skip.HasValue)
+            usersQuery = usersQuery.Skip(skip.Value);
+
+        if (take.HasValue)
+            usersQuery = usersQuery.Take(take.Value);
+
+        return await usersQuery.ToListAsync();
     }
 
     public async Task<T> Update(T entity)
