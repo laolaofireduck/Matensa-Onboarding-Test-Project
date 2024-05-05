@@ -19,6 +19,9 @@ public class User : AggregateRoot<UserId, Guid>, ISoftDeletable
     [NotMapped]
     public string FullName
         => $"{FirstName} {LastName}";
+    [NotMapped]
+    public int Age =>
+         DateTime.Now.Year - DOB.Year;
     #endregion
 
     private User(

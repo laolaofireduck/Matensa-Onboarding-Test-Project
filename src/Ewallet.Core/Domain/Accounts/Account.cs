@@ -40,23 +40,15 @@ public class Account : AggregateRoot<AccountId, Guid>
 
     public decimal GetCurrentBalance()
     {
-        var currentStatement = _statements
-                .FirstOrDefault(s => s.Date.Year == DateTime.Now.Year &&
-                        s.Date.Month == DateTime.Now.Month);
+        // Find the closing balance of the previous month
+        decimal previousClosingBalance = GetPreviousMonthClosingBalance(DateTime.Now);
 
-        decimal depositSum = _transactions
-            .Where(t => t.Date.Year == DateTime.Now.Year &&
-                        t.Date.Month == DateTime.Now.Month)
-            .Where(t => t.TransactionType == TransactionType.Deposit || t.TransactionType == TransactionType.Recieve)
-            .Sum(t => t.Amount);
+        // Calculate the sum of credit and debit transactions for the current month
+        decimal totalCredit = GetTotalCredit(DateTime.Now);
+        decimal totalDebit = GetTotalDebit(DateTime.Now);
 
-        decimal withdrawalSum = _transactions
-            .Where(t => t.Date.Year == DateTime.Now.Year &&
-                        t.Date.Month == DateTime.Now.Month)
-            .Where(t => t.TransactionType == TransactionType.Withdrawal || t.TransactionType == TransactionType.Transfer)
-            .Sum(t => t.Amount);
-
-        decimal currentBalance = currentStatement?.ClosingBalance ?? 0 + depositSum - withdrawalSum;
+        // Calculate the current balance
+        decimal currentBalance = previousClosingBalance + totalCredit - totalDebit;
 
         return currentBalance;
     }
@@ -125,5 +117,10 @@ public class Account : AggregateRoot<AccountId, Guid>
             .Sum(t => t.Amount);
 
         return sum;
+    }
+
+    internal void AddToInitialBalance(decimal amount)
+    {
+        Initial += amount;
     }
 }

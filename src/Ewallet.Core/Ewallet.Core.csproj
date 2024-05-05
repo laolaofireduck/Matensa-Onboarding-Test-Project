@@ -21,7 +21,7 @@
 
 
   <ItemGroup>
-    <Folder Include="Application\Account\Events\" />
+    <Folder Include="Application\Accounts\Events\" />
   </ItemGroup>
 
 </Project>

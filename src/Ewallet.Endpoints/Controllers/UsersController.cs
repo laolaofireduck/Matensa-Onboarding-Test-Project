@@ -7,6 +7,9 @@ using Ewallet.Endpoints.Contracts.Users;
 using Ewallet.Core.Application.Users.Update;
 using Ewallet.Core.Application.Users.List;
 using Ewallet.Core.Application.Users.Delete;
+using Ewallet.Core.Application.Accounts.AddToInitial;
+using Ewallet.Core.Domain.Users;
+using Ewallet.Endpoints.Contracts.Accounts;
 
 
 namespace Ewallet.Endpoints.Controllers;
@@ -76,6 +79,21 @@ public class UsersController : ApiControllerBase
 
         return DeleteResult.Match(
             deleteResult => Ok(),
+            errors => Problem(errors));
+    }
+
+    [HttpPut("{id:Guid}/account/balance")]
+    public async Task<IActionResult> AddToInititalBalance(Guid id, AddToInititalBalanceRequest request)
+    {
+        var command = new AddToInititalBalanceCommand(
+            UserId.Create(id),
+            request.Amount
+            );
+
+        var Result = await _mediator.Send(command);
+
+        return Result.Match(
+            result => Ok(_mapper.Map<AccountResponse>(result)),
             errors => Problem(errors));
     }
 }
