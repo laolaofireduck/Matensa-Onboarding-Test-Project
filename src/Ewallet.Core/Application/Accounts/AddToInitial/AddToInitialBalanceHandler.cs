@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 using Ewallet.Core.Application.Users;
-using Ewallet.Core.Domain.Users;
+using Ewallet.Core.Domain.Errors;
 using MediatR;
 
 namespace Ewallet.Core.Application.Accounts.AddToInitial;

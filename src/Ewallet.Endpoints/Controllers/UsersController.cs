@@ -10,11 +10,13 @@ using Ewallet.Core.Application.Users.Delete;
 using Ewallet.Core.Application.Accounts.AddToInitial;
 using Ewallet.Core.Domain.Users;
 using Ewallet.Endpoints.Contracts.Accounts;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Ewallet.Endpoints.Controllers;
 
 [Route("api/users")]
+[Authorize(AuthenticationSchemes = "AdminToken")]
 public class UsersController : ApiControllerBase
 {
     private readonly ISender _mediator;

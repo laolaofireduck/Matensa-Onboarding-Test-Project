@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 
-namespace Ewallet.Core.Domain.Users;
+namespace Ewallet.Core.Domain.Errors;
 
 public static partial class Errors
 {

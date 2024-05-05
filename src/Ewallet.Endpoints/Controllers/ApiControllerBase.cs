@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Ewallet.Endpoints.Controllers;
 
-//[Authorize]
+[Authorize]
 [ApiController]
 public class ApiControllerBase : ControllerBase
 {
